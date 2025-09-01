@@ -18,8 +18,17 @@
         "name": "next"
       }
     ],
+    "types":["vitest/globals"],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./*"],
+      "@/src/*": ["./src/*"],
+      "@/app/*": ["./src/app/*"],
+      "@/test/*": ["./src/tests/*"],
+      "@/_components/*": ["./src/app/_components/*"],
+      "@/_lib/*": ["./src/app/_lib/*"],
+      "@/_styles/*": ["./src/app/_styles/*"],
+      "@/_utils/*": ["./src/app/_utils/*"],
+      "@/_hooks/*": ["./src/app/_hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
