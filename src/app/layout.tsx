@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 
-import "@/_styles/global.css";
+import '@/_styles/globals.css'
 import { Metadata } from "next";
 import { nunitoSans } from "@/src/app/_styles/font";
 
