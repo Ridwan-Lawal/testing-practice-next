@@ -1,27 +1,3 @@
-interface NetworkErrorCause {
-  code: string;
-  errno?: number;
-  syscall?: string;
-  hostname?: string;
-  address?: string;
-  port?: number;
-}
-
-interface NetworkTypeError extends TypeError {
-  cause: NetworkErrorCause;
-}
-
-export function isNetworkTypeError(error: unknown): error is NetworkTypeError {
-  return (
-    error instanceof TypeError &&
-    error.message === "fetch failed" &&
-    error.cause != null &&
-    typeof error.cause === "object" &&
-    "code" in error.cause &&
-    typeof (error.cause as any).code === "string"
-  );
-}
-
 export function throwErrorMessage(resStatus: number) {
   switch (resStatus) {
     case 400:
