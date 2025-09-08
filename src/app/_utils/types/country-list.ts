@@ -4,6 +4,7 @@ export interface Country {
   capital: string[];
   region: string;
   population: number;
+  continents: string[];
 }
 
 export interface Flags {
