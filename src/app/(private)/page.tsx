@@ -2,14 +2,14 @@ import CountriesList from "@/src/app/_components/landing-page/CountriesList";
 import Filters from "@/src/app/_components/landing-page/Filters";
 import { Suspense } from "react";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ continent?: string }>;
-}) {
+interface PageTypes {
+  searchParams: Promise<{ continent?: string; q?: string }>;
+}
+
+export default async function Page({ searchParams }: PageTypes) {
   const paramsData = await searchParams;
 
-  const suspenseKey = `${paramsData.continent}`;
+  const suspenseKey = `${paramsData.continent}-${paramsData.q}`;
 
   return (
     <div className="mx-auto max-w-[1280px]">
@@ -18,7 +18,10 @@ export default async function Page({
       </div>
 
       <Suspense fallback={<div>Loading...</div>} key={suspenseKey}>
-        <CountriesList continent={paramsData?.continent} />
+        <CountriesList
+          continent={paramsData?.continent}
+          searchQuery={paramsData?.q}
+        />
       </Suspense>
     </div>
   );

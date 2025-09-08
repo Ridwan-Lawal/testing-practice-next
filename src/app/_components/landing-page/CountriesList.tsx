@@ -1,12 +1,34 @@
 import CountryCard from "@/src/app/_components/landing-page/CountryCard";
 import { getAllCountries } from "@/src/app/_lib/services/countries";
+import { StrUnd } from "@/src/app/_utils/types/reusables";
+import Link from "next/link";
 
 interface CountriesListType {
-  continent: string | undefined;
+  continent: StrUnd;
+  searchQuery: StrUnd;
 }
 
-export default async function CountriesList({ continent }: CountriesListType) {
-  const countries = await getAllCountries(continent);
+export default async function CountriesList({
+  continent,
+  searchQuery,
+}: CountriesListType) {
+  const countries = await getAllCountries(continent, searchQuery);
+
+  if (!countries.length) {
+    return (
+      <p
+        role="alert"
+        className="mt-20 flex items-center justify-center font-medium text-red-500"
+      >
+        There&apos;s no Country or Capital with the name
+        <span className="font-bold">
+          &ldquo;{searchQuery}
+          &rdquo;
+        </span>
+        in this region. Try other regions.
+      </p>
+    );
+  }
 
   return (
     <div
@@ -15,11 +37,9 @@ export default async function CountriesList({ continent }: CountriesListType) {
     >
       {/* country */}
       {countries?.map((country, idx) => (
-        <CountryCard
-          key={idx}
-          country={country}
-          priority={idx < 3 ? true : false}
-        />
+        <Link href={`/country/${country.name.common}`} key={idx}>
+          <CountryCard country={country} priority={idx < 3 ? true : false} />
+        </Link>
       ))}
     </div>
   );

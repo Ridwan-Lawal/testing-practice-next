@@ -1,12 +1,16 @@
 import { Country } from "@/src/app/_utils/types/country-list";
 import { throwErrorMessage } from "@/src/app/_utils/types/networkError";
+import { StrUnd } from "@/src/app/_utils/types/reusables";
 import axios, { AxiosError } from "axios";
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
 
 export const getAllCountries = cache(
   unstable_cache(
-    async function (continent?: string | undefined): Promise<Country[]> {
+    async function (
+      continent?: StrUnd,
+      searchQuery?: StrUnd,
+    ): Promise<Country[]> {
       const fields = "fields=name,population,region,capital,flags,continents";
 
       const url =
@@ -14,13 +18,26 @@ export const getAllCountries = cache(
           ? `${process.env.COUNTRES_API_URL}/all?${fields}`
           : `${process.env.COUNTRES_API_URL}/region/${continent}?${fields}`;
 
-      console.log(url);
-
       try {
         console.log("🚀 CACHE MISS - Fetching from API");
         const res = await axios.get<Country[]>(url);
 
         console.log(res.data.at(0));
+
+        if (searchQuery) {
+          return res.data.filter(
+            (country) =>
+              country.name.common
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase()) ||
+              country.name.official
+                .toLowerCase()
+                .includes(searchQuery.toLowerCase()) ||
+              country.capital?.[0]
+                ?.toLowerCase()
+                .includes(searchQuery.toLowerCase()),
+          );
+        }
 
         return res.data;
       } catch (error) {
