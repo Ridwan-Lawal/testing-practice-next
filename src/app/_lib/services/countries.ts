@@ -11,7 +11,8 @@ export const getAllCountries = cache(
       continent?: StrUnd,
       searchQuery?: StrUnd,
     ): Promise<Country[]> {
-      const fields = "fields=name,population,region,capital,flags,continents";
+      const fields =
+        "fields=name,population,region,capital,flags,continents,cca2,cca3";
 
       const url =
         continent === "All" || !continent

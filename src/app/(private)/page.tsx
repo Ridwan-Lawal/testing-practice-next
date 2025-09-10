@@ -1,5 +1,6 @@
 import CountriesList from "@/src/app/_components/landing-page/CountriesList";
 import Filters from "@/src/app/_components/landing-page/Filters";
+import { CountriesListSkeleton } from "@/src/app/_components/skeleton/CountryListSkeleton";
 import { Suspense } from "react";
 
 interface PageTypes {
@@ -17,7 +18,7 @@ export default async function Page({ searchParams }: PageTypes) {
         <Filters />
       </div>
 
-      <Suspense fallback={<div>Loading...</div>} key={suspenseKey}>
+      <Suspense fallback={<CountriesListSkeleton />} key={suspenseKey}>
         <CountriesList
           continent={paramsData?.continent}
           searchQuery={paramsData?.q}

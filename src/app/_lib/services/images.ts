@@ -1,6 +1,7 @@
 import { getPlaiceholder } from "plaiceholder";
 
-export async function getBlurDataUrl(imageUrl: string) {
+export async function getBlurDataUrl(imageUrl: string | undefined) {
+  if (!imageUrl) return;
   try {
     const res = await fetch(imageUrl);
     const buffer = await res.arrayBuffer();

@@ -1,13 +1,15 @@
 import BackButton from "@/src/app/_components/details-page/BackButton";
 import CountryDetails from "@/src/app/_components/details-page/CountryDetails";
+import { CountryDetailSkeleton } from "@/src/app/_components/skeleton/CountryDetailsSkeleton";
+import { getAllCountries } from "@/src/app/_lib/services/countries";
 import { getCountryByName } from "@/src/app/_lib/services/countryById";
 import { Suspense } from "react";
 
-export async function generateMetadata({
-  params,
-}: {
+interface ParamsType {
   params: Promise<{ name: string }>;
-}) {
+}
+
+export async function generateMetadata({ params }: ParamsType) {
   const { name } = await params;
   const country = await getCountryByName(name);
 
@@ -17,20 +19,24 @@ export async function generateMetadata({
 }
 
 // Using this to convert the route to static.
-// export async function generateStaticParams() {}
+export async function generateStaticParams() {
+  const allCountries = await getAllCountries();
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ name: string }>;
-}) {
+  const countriesNames = allCountries.map((country) => ({
+    name: country.name.common,
+  }));
+
+  return countriesNames;
+}
+
+export default async function Page({ params }: ParamsType) {
   const { name } = await params;
 
   return (
-    <div className="mt-10 border md:mt-16">
+    <div className="mt-10 px-4 pb-20 sm:px-6 md:mt-16 md:px-12">
       <BackButton />
 
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<CountryDetailSkeleton />}>
         <CountryDetails countryName={name} />
       </Suspense>
     </div>
