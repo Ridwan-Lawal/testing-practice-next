@@ -18,12 +18,12 @@ export default async function CountryCard({
   return (
     <div
       data-testid="country-card"
-      className="w-full max-w-[300px] overflow-hidden rounded-md bg-white shadow-md shadow-gray-200"
+      className="h-full w-full max-w-[300px] overflow-hidden rounded-md bg-white shadow-md shadow-gray-200"
     >
       {/* image */}
-      <div className="relative aspect-video">
+      <div className="relative h-[200px] w-[300px]">
         <Image
-          src={flags.png}
+          src={flags.svg}
           alt="flag"
           fill
           className="object-cover"

@@ -33,3 +33,7 @@ export interface Jam {
   official: string;
   common: string;
 }
+
+export interface Borders {
+  name: Name;
+}
