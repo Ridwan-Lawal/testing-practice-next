@@ -3,18 +3,31 @@ import CountryDetails from "@/src/app/_components/details-page/CountryDetails";
 import { CountryDetailSkeleton } from "@/src/app/_components/skeleton/CountryDetailsSkeleton";
 import { getAllCountries } from "@/src/app/_lib/services/countries";
 import { getCountryByName } from "@/src/app/_lib/services/countryById";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
 interface ParamsType {
   params: Promise<{ name: string }>;
 }
 
-export async function generateMetadata({ params }: ParamsType) {
+export async function generateMetadata({
+  params,
+}: ParamsType): Promise<Metadata> {
   const { name } = await params;
   const country = await getCountryByName(name);
 
   return {
     title: country?.name?.common,
+    description: country?.flags?.alt,
+    openGraph: {
+      images: [
+        {
+          url: country?.flags.png || "",
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
   };
 }
 

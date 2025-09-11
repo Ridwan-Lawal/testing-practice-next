@@ -24,8 +24,6 @@ export default function ContinentFilter({ countries }: ContinentFilterTypes) {
     new Set(countries.map((country) => country.region)),
   );
 
-  console.log(continents);
-
   function onSelectContinent(continent: string) {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -43,10 +41,8 @@ export default function ContinentFilter({ countries }: ContinentFilterTypes) {
   useEffect(() => {
     function handleClickOutsideDropdown(e: MouseEvent) {
       const targetEl = e.target as HTMLElement;
-      console.log(targetEl);
 
       if (!targetEl.closest(".dropdown-block")) {
-        console.log(e.target);
         setDropdownIsOpen(false);
       }
     }

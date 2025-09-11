@@ -1,16 +1,23 @@
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
-import '@/_styles/globals.css'
-import { Metadata } from "next";
+import "@/_styles/globals.css";
 import { nunitoSans } from "@/src/app/_styles/font";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - Countries",
-    default: "Home - Countries",
+    template: "%s - Rest Countries",
+    default: "Home - Rest Countries",
   },
 
-  description: "This is a basic description of the countries",
+  description:
+    "Discover detailed information about every country in the world. Browse flags, population, regions, capitals, and border countries with our interactive country explorer.",
+
+  twitter: {
+    description:
+      "Discover detailed information about every country in the world. Browse flags, population, regions, capitals, and border countries with our interactive country explorer.",
+    title: "Rest Countries",
+  },
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
