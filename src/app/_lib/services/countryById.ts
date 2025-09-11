@@ -19,10 +19,12 @@ export const getCountryByName = cache(
         // I Implemented this for runtime typechecking to keep track of changes in data responses
         const resValidation = CountryByNameSchema.safeParse(res.data[0]);
         if (!resValidation.success) {
-          console.log(
-            "Invalid data structure:",
-            z.treeifyError(resValidation.error),
-          );
+          if (process.env.NODE_ENV === "development") {
+            console.log(
+              "Invalid data structure:",
+              z.treeifyError(resValidation.error),
+            );
+          }
         }
 
         return resValidation.data;

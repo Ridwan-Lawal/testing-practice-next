@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/wikipedia/commons/**",
       },
+      {
+        protocol: "https",
+        hostname: "www.flaticon.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

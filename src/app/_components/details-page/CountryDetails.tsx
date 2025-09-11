@@ -25,8 +25,6 @@ export default async function CountryDetails({
   const bordersName = borders?.map((border) => border?.name?.common);
 
   const countries = await getAllCountries();
-  console.log(countries[0]);
-  // console.log(country);
 
   const nativeNameKeys = Object.keys(country?.name?.nativeName as object);
   const languages = Object.values(country?.languages as object);
@@ -73,7 +71,6 @@ export default async function CountryDetails({
     },
   ];
 
-  // console.log(firstSetOfDetails, secondSetOfDetails);
   return (
     <div className="mt-10 flex flex-col gap-8 text-neutral-950 lg:flex-row">
       {/* flags */}

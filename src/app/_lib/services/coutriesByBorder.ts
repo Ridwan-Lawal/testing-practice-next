@@ -19,10 +19,12 @@ export const getCountryNameByBorder = unstable_cache(
       const resValidation = countryByBorderSchema.safeParse(res.data);
 
       if (!resValidation?.success) {
-        console.log(
-          "Invalid data structure, type is diff from res:",
-          z.treeifyError(resValidation?.error)?.errors,
-        );
+        if (process.env.NODE_ENV === "development") {
+          console.log(
+            "Invalid data structure, type is diff from res:",
+            z.treeifyError(resValidation?.error)?.errors,
+          );
+        }
       }
 
       return resValidation.data;

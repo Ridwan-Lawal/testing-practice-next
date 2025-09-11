@@ -20,10 +20,7 @@ export const getAllCountries = cache(
           : `${process.env.COUNTRES_API_URL}/region/${continent}?${fields}`;
 
       try {
-        console.log("🚀 CACHE MISS - Fetching from API");
         const res = await axios.get<Country[]>(url);
-
-        console.log(res.data.at(0));
 
         if (searchQuery) {
           return res.data.filter(
