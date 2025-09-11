@@ -1,4 +1,3 @@
-import { getAllCountries } from "@/src/app/_lib/services/countries";
 import { getCountryByName } from "@/src/app/_lib/services/countryById";
 import { getCountryNameByBorder } from "@/src/app/_lib/services/coutriesByBorder";
 import { getBlurDataUrl } from "@/src/app/_lib/services/images";
@@ -23,8 +22,6 @@ export default async function CountryDetails({
     : [];
 
   const bordersName = borders?.map((border) => border?.name?.common);
-
-  const countries = await getAllCountries();
 
   const nativeNameKeys = Object.keys(country?.name?.nativeName as object);
   const languages = Object.values(country?.languages as object);
@@ -71,6 +68,7 @@ export default async function CountryDetails({
     },
   ];
 
+  // console.log(firstSetOfDetails, secondSetOfDetails);
   return (
     <div className="mt-10 flex flex-col gap-8 text-neutral-950 lg:flex-row">
       {/* flags */}
