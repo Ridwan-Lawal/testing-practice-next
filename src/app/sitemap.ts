@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const countriesUrl = countries?.map((country) => ({
     url: `${process.env.NEXT_PUBLIC_APP_URL}/country/${country?.name?.common}`,
     lastModified: new Date(Date.now()),
+    changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
 
